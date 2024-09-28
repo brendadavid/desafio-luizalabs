@@ -1,0 +1,13 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+
+spring:
+  data:
+    mongodb:
+      database: luizalabswishlist
+      authentication-database: luizalabswishlist
+      repositories: null
+      enabled: true
+      uri: mongodb://localhost:27017
