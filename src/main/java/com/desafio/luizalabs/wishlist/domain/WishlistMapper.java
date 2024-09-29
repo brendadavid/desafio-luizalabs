@@ -6,12 +6,13 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Mapper(componentModel = "spring", imports = {LocalDateTime.class, UUID.class}, unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", imports = {UUID.class}, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface WishlistMapper {
 
-    @Mapping(target = "id", expression = "java(UUID.randomUUID().toString())")
+    @Mapping(target = "wishListId", expression = "java(UUID.randomUUID().toString())")
     Wishlist toModel(WishlistBO bo);
+
+    WishlistBO toBO(Wishlist wishlist);
 }

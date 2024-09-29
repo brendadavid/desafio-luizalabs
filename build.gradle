@@ -15,6 +15,8 @@ java {
 	}
 }
 
+compileJava.options.encoding = 'UTF-8'
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -23,6 +25,10 @@ configurations {
 
 repositories {
 	mavenCentral()
+}
+
+springBoot {
+	buildInfo()
 }
 
 dependencyManagement {

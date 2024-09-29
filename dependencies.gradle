@@ -2,20 +2,19 @@ ext {
     set('springCloudVersion', "2023.0.3")
     set('swaggerVersion', '2.6.0')
     set('mongockVersion', '4.0.0.alpha')
-    set('mapstructVersion', '1.5.3.Final')
+    set('mapstructVersion', '1.6.2')
     set('flapdoodleVersion', '4.11.0')
+    set('lombokMapstructBindingVersion', '0.2.0')
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-
 
     // Banco de Dados
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation ("com.github.cloudyrock.mongock:mongock-spring:${mongockVersion}") {
         exclude group: 'org.mongodb', module: 'mongo-java-driver'
     }
-
 
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -24,9 +23,9 @@ dependencies {
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${swaggerVersion}"
 
     // Mapper
-    compileOnly 'org.projectlombok:lombok'
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
-
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor 'org.projectlombok:lombok'
 
@@ -38,7 +37,6 @@ dependencies {
     testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
 
     // Banco de testes
-    runtimeOnly 'com.h2database:h2'
     testImplementation "de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring30x:${flapdoodleVersion}"
 
 }

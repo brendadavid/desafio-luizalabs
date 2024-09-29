@@ -8,8 +8,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Value
 @Builder
 public class WishlistBO {
-    String nome;
-    String codigo;
+
+    Long wishListId;
+    Long clienteId;
+    String nomeProduto;
+    String codigoProduto;
 
     @Override
     public String toString() {
