@@ -33,7 +33,7 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Map<String, String>> handleJsonParseErrors() {
-        String errorMessage = "Valor inválido. O campo deve ser um número do tipo Long.";
+        String errorMessage = "Valor inválido. O campo não pode ser vazio ou deve ser um número do tipo Long.";
 
         return ResponseEntity.badRequest().body(Map.of(MESSAGE, errorMessage));
     }

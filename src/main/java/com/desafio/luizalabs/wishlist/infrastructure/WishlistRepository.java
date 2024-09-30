@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 @Repository
@@ -23,10 +22,8 @@ public interface WishlistRepository extends MongoRepository<Wishlist, String>{
     ) {
         Query query = new Query();
 
-        if (isNotEmpty(produtoIds)) {
-            query.addCriteria(where("produtoIds").in(produtoIds)
-                    .and("clienteId").is(clienteId));
-        }
+        query.addCriteria(where("produtoIds").in(produtoIds)
+                .and("clienteId").is(clienteId));
 
         return mongoOperations.exists(query, Wishlist.class);
     }
