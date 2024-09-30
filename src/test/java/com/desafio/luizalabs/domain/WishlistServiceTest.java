@@ -90,7 +90,7 @@ class WishlistServiceTest {
 
         when(repository.buscarProduto(mongoOperations, bo.getProdutoIds(), bo.getClienteId())).thenReturn(true);
 
-        String expectedMessage = "Já existe um produto com mesmo id cadastrado na Wishlist com clienteId 123.";
+        String expectedMessage = "Já existe um ou mais produtos com o mesmo id cadastrado na Wishlist do clienteId 123.";
 
         Exception exception = assertThrows(Exception.class, () ->
                 service.adicionarProdutos(bo)
@@ -108,7 +108,7 @@ class WishlistServiceTest {
         var wishlist = WishListFixture.criarWishList().build();
         var bo = WishListFixture.criarBO().produtoIds(gerarIdsAleatorios()).build();
 
-        String expectedMessage = "Já existem 20 produtos cadastrados na Wishlist com clienteId 123.";
+        String expectedMessage = "Já existem 20 produtos cadastrados na Wishlist do clienteId 123.";
 
         when(repository.buscarProduto(mongoOperations, bo.getProdutoIds(), bo.getClienteId())).thenReturn(false);
         when(repository.findByClienteId(123L)).thenReturn(Optional.of(wishlist));
@@ -148,7 +148,7 @@ class WishlistServiceTest {
 
         when(repository.buscarProdutoPorId(mongoOperations, clienteId, produtoId)).thenReturn(null);
 
-        String expectedMessage = "Não existe um produto com id 1567 cadastrado na Wishlist para esse clienteId: 2.";
+        String expectedMessage = "Não existe um produtoId 1567 cadastrado na Wishlist do clienteId 2.";
 
         Exception exception = assertThrows(Exception.class, () ->
                 service.deletarPorId(clienteId, produtoId)

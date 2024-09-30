@@ -70,7 +70,7 @@ class WishlistListagemServiceTest {
                 service.buscarProdutos(1L)
         );
 
-        String expectedMessage = "Não existe nenhum produto cadastrado na Wishlist com clienteId 1.";
+        String expectedMessage = "Não existe nenhum produto cadastrado na Wishlist do clienteId 1.";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
@@ -99,7 +99,7 @@ class WishlistListagemServiceTest {
                 service.buscarProdutoPorId(1L, 1567L)
         );
 
-        String expectedMessage = "Não existe um produto com id 1567 cadastrado na Wishlist para esse clienteId: 1.";
+        String expectedMessage = "Não existe um produtoId 1567 cadastrado na Wishlist do clienteId 1.";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
