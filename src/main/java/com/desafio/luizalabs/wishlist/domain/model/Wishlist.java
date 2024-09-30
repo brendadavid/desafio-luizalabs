@@ -7,6 +7,8 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -16,6 +18,5 @@ public class Wishlist {
     @Id
     private String wishListId;
     private Long clienteId;
-    private String nomeProduto;
-    private String codigoProduto;
+    private List<Long> produtoIds;
 }

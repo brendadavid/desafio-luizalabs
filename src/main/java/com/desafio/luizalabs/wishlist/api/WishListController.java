@@ -1,7 +1,9 @@
 package com.desafio.luizalabs.wishlist.api;
 
+import com.desafio.luizalabs.wishlist.api.dto.BuscarProdutoDTO;
 import com.desafio.luizalabs.wishlist.api.dto.BuscarWishlistDTO;
 import com.desafio.luizalabs.wishlist.api.dto.WishlistDTO;
+import com.desafio.luizalabs.wishlist.domain.WishlistListagemService;
 import com.desafio.luizalabs.wishlist.domain.WishlistService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -9,9 +11,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/wishList")
@@ -20,46 +21,44 @@ import java.util.List;
 public class WishListController {
 
     private final WishlistService service;
+    private final WishlistListagemService listagemService;
     private final WishlistDTOMapper mapper;
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Operação para adicionar produtos na Wishlist do cliente.")
-    public void adicionarProdutos(@Valid WishlistDTO dto) {
+    public void adicionarProdutos(@Valid @RequestBody WishlistDTO dto) {
          service.adicionarProdutos(this.mapper.toBO(dto));
     }
 
     @GetMapping("produtos/{clienteId}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Operação para buscar todos os produtos adicionados na Wishlist por clienteId.")
-    public List<BuscarWishlistDTO> buscarProdutosPorClienteId(
+    public BuscarWishlistDTO buscarProdutosPorClienteId(
             @PathVariable("clienteId") Long clienteId
     ) {
-         return service.buscarProdutos(clienteId)
-                 .stream()
-                 .map(this.mapper::toDTO)
-                 .toList();
+         return this.mapper.toDTO(listagemService.buscarProdutos(clienteId));
     }
 
     @GetMapping("produto/{clienteId}")
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "Operação para buscar um produto na Wishlist do cliente por código do produto.")
-    public BuscarWishlistDTO buscarProdutosPorNomeOuCodigo(
+    @Operation(summary = "Operação para buscar um produto na Wishlist do cliente por id do produto.")
+    public BuscarProdutoDTO buscarProdutoPorId(
             @PathVariable("clienteId") Long clienteId,
-            @Parameter(name = "codigoProduto", description = "Código do produto cadastrado.")
-            @RequestParam(value = "codigoProduto") String codigoProduto
+            @Parameter(name = "produtoId", description = "Id do produto cadastrado.")
+            @RequestParam(value = "produtoId") Long produtoId
     ) {
-        return this.mapper.toDTO(service.buscarProdutoPorCodigo(clienteId, codigoProduto));
+        return this.mapper.toDTO(listagemService.buscarProdutoPorId(clienteId, produtoId));
     }
 
     @DeleteMapping("/{clienteId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Operação para deletar um registro da Wishlist do cliente por codigo do produto.")
+    @Operation(summary = "Operação para deletar um produto da Wishlist do cliente por id do produto.")
     public void deletarProdutoPorCodigo(
             @PathVariable("clienteId") Long clienteId,
-            @Parameter(name = "codigoProduto", description = "Código do produto cadastrado.")
-            @RequestParam(value = "codigoProduto") String codigoProduto
+            @Parameter(name = "produtoId", description = "Id do produto cadastrado.")
+            @RequestParam(value = "produtoId") Long produtoId
     ) {
-        service.deletarPorCodigo(clienteId, codigoProduto);
+        service.deletarPorCodigo(clienteId, produtoId);
     }
 }

@@ -4,14 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
-public class BuscarWishlistDTO {
+public class BuscarProdutoDTO {
 
-    private String wishListId;
-    private Long clienteId;
-    private List<Long> produtoIds;
+    private Long produtoId;
 }

@@ -5,9 +5,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 public enum ErrosWishlist {
 
-    EXISTE_PRODUTO_CADASTRADO("Já existe um produto com o código %s cadastrado na Wishlist com clientId %s."),
+    EXISTE_PRODUTO_CADASTRADO("Já existe um produto com mesmo id cadastrado na Wishlist com clientId %s."),
+    EXCEDEU_LIMITE_MAXIMO("Já existem 20 produtos cadastrados na Wishlist com clientId %s."),
     NAO_EXISTE_PRODUTO_CADASTRADO("Não existe nenhum produto cadastrado na Wishlist com clientId %s."),
-    NAO_EXISTE_PRODUTO_POR_CODIGO("Não existe um produto cadastrado na Wishlist com o código %s e com clientId %s.");
+    NAO_EXISTE_PRODUTO_POR_CODIGO("Não existe um produto com id %s cadastrado na Wishlist para esse clientId: %s.");
+
 
     private final String mensagem;
 

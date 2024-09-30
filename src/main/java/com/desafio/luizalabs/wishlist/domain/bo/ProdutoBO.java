@@ -5,15 +5,11 @@ import lombok.Value;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import java.util.List;
-
 @Value
 @Builder
-public class WishlistBO {
+public class ProdutoBO {
 
-    String wishListId;
-    Long clienteId;
-    List<Long> produtoIds;
+    Long produtoId;
 
     @Override
     public String toString() {
