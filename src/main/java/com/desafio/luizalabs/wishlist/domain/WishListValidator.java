@@ -1,5 +1,6 @@
 package com.desafio.luizalabs.wishlist.domain;
 
+import com.desafio.luizalabs.wishlist.domain.model.Wishlist;
 import com.desafio.luizalabs.wishlist.infrastructure.ProdutoProjection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -32,8 +33,8 @@ public class WishListValidator {
         }
     }
 
-    public void validaSeExisteAlgumProdutoCadastrado(Long clienteId, List<Long> produtos) {
-        if (produtos.isEmpty()) {
+    public void validaSeExisteAlgumProdutoCadastrado(Long clienteId, Wishlist wishlist) {
+        if (isEmpty(wishlist)) {
             throw ErrosWishlist.NAO_EXISTE_PRODUTO_CADASTRADO.notFoundException(clienteId);
         }
     }

@@ -18,7 +18,7 @@ public class WishlistListagemService {
 
     public WishlistBO buscarProdutos(Long clienteId) {
         var wishlist = repository.buscarTodosOsProdutos(mongoOperations, clienteId);
-        validator.validaSeExisteAlgumProdutoCadastrado(clienteId, wishlist.getProdutoIds());
+        validator.validaSeExisteAlgumProdutoCadastrado(clienteId, wishlist);
 
         return mapper.toBO(wishlist);
     }
