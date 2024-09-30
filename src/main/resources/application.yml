@@ -10,4 +10,4 @@ spring:
       authentication-database: luizalabswishlist
       repositories: null
       enabled: true
-      uri: mongodb://localhost:27017
+      uri: mongodb://mongodb:27017
