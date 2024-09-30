@@ -2,6 +2,7 @@ package com.desafio.luizalabs.config;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -28,5 +29,12 @@ public class CustomExceptionHandler {
                 .toList();
 
         return ResponseEntity.badRequest().body(Map.of(MESSAGE, errors));
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<Map<String, String>> handleJsonParseErrors() {
+        String errorMessage = "Valor inválido. O campo deve ser um número do tipo Long.";
+
+        return ResponseEntity.badRequest().body(Map.of(MESSAGE, errorMessage));
     }
 }
