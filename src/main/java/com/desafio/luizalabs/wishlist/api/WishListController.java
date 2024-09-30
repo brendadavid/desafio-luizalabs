@@ -59,6 +59,6 @@ public class WishListController {
             @Parameter(name = "produtoId", description = "Id do produto cadastrado.")
             @RequestParam(value = "produtoId") Long produtoId
     ) {
-        service.deletarPorCodigo(clienteId, produtoId);
+        service.deletarPorId(clienteId, produtoId);
     }
 }

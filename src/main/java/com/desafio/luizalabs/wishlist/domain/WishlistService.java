@@ -39,7 +39,7 @@ public class WishlistService {
                 );
     }
 
-    public void deletarPorCodigo(Long clienteId, Long produtoId) {
+    public void deletarPorId(Long clienteId, Long produtoId) {
         var produtoProjection = repository.buscarProdutoPorId(mongoOperations, clienteId, produtoId);
         validator.validaSeExisteProdutoCadastradoPorId(produtoProjection, clienteId, produtoId);
 
