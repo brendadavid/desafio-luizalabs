@@ -3,8 +3,9 @@ ext {
     set('swaggerVersion', '2.6.0')
     set('mongockVersion', '4.0.0.alpha')
     set('mapstructVersion', '1.6.2')
-    set('flapdoodleVersion', '4.11.0')
+    set('flapdoodleVersion', '4.7.0')
     set('lombokMapstructBindingVersion', '0.2.0')
+    set('wiremockVersion', '4.1.4')
 }
 
 dependencies {
@@ -29,6 +30,7 @@ dependencies {
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor 'org.projectlombok:lombok'
 
+    // Testes
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -38,5 +40,12 @@ dependencies {
 
     // Banco de testes
     testImplementation "de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring30x:${flapdoodleVersion}"
+
+    // WireMock
+    testImplementation "org.springframework.cloud:spring-cloud-contract-wiremock:${wiremockVersion}"
+
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
 
 }

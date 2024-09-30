@@ -5,6 +5,7 @@ import com.desafio.luizalabs.wishlist.domain.bo.WishlistBO;
 import com.desafio.luizalabs.wishlist.domain.model.Wishlist;
 import com.desafio.luizalabs.wishlist.infrastructure.ProdutoProjection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WishListFixture {
@@ -12,7 +13,7 @@ public class WishListFixture {
     public static Wishlist.WishlistBuilder criarWishList() {
         return Wishlist.builder()
                 .clienteId(123L)
-                .produtoIds(List.of(1L, 3L, 5L));
+                .produtoIds(new ArrayList<>(List.of(1L, 3L, 5L)));
     }
 
     public static WishlistBO.WishlistBOBuilder criarBO() {

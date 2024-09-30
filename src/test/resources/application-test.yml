@@ -1,5 +1,4 @@
 spring:
-  ## mongo config
   data:
     mongodb:
       database: test
@@ -9,4 +8,4 @@ de:
   flapdoodle:
     mongodb:
       embedded:
-        version: 4.0.2
+        version: 3.6.1
