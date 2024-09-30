@@ -43,7 +43,7 @@ class WishlistListagemServiceTest {
 
     @Test
     @SneakyThrows
-    @DisplayName(value = "Deve buscar todos os produtos cadastrados para o clientId.")
+    @DisplayName(value = "Deve buscar todos os produtos cadastrados para o clienteId.")
     void deveBuscarTodosOsProdutosPorClienteId() {
         var id = UUID.randomUUID().toString();
         var wishList = WishListFixture.criarWishList().wishListId(id).build();
@@ -61,13 +61,13 @@ class WishlistListagemServiceTest {
 
     @Test
     @SneakyThrows
-    @DisplayName(value = "Deve apresentar erro ao buscar todos os produtos quando não houver produtos cadastrados para o clientId.")
+    @DisplayName(value = "Deve apresentar erro ao buscar todos os produtos quando não houver produtos cadastrados para o clienteId.")
     void deveApresentarErroAoBuscarTodosOsProdutosPorClienteId() {
         Exception exception = assertThrows(Exception.class, () ->
                 service.buscarProdutos(1L)
         );
 
-        String expectedMessage = "Não existe nenhum produto cadastrado na Wishlist com clientId 1.";
+        String expectedMessage = "Não existe nenhum produto cadastrado na Wishlist com clienteId 1.";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
@@ -75,7 +75,7 @@ class WishlistListagemServiceTest {
 
     @Test
     @SneakyThrows
-    @DisplayName(value = "Deve buscar um produto cadastrado para o produtoId e clientId informados.")
+    @DisplayName(value = "Deve buscar um produto cadastrado para o produtoId e clienteId informados.")
     void deveBuscarUmProdutoPorId() {
         var projection = WishListFixture.criarProjection().build();
 
@@ -90,13 +90,13 @@ class WishlistListagemServiceTest {
 
     @Test
     @SneakyThrows
-    @DisplayName(value = "Deve apresentar erro ao buscar um produto quando não houver produto cadastrado para o produtoId e clientId informados.")
+    @DisplayName(value = "Deve apresentar erro ao buscar um produto quando não houver produto cadastrado para o produtoId e clienteId informados.")
     void deveApresentarErroAoBuscarUmProdutoPorId() {
         Exception exception = assertThrows(Exception.class, () ->
                 service.buscarProdutoPorId(1L, 1567L)
         );
 
-        String expectedMessage = "Não existe um produto com id 1567 cadastrado na Wishlist para esse clientId: 1.";
+        String expectedMessage = "Não existe um produto com id 1567 cadastrado na Wishlist para esse clienteId: 1.";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
