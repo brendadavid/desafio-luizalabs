@@ -2,6 +2,7 @@ package com.desafio.luizalabs.domain;
 
 import com.desafio.luizalabs.WishListFixture;
 import com.desafio.luizalabs.wishlist.domain.WishListValidator;
+import com.desafio.luizalabs.wishlist.domain.WishlistMapper;
 import com.desafio.luizalabs.wishlist.domain.WishlistMapperImpl;
 import com.desafio.luizalabs.wishlist.domain.WishlistService;
 import com.desafio.luizalabs.wishlist.domain.model.Wishlist;
@@ -25,13 +26,14 @@ class WishlistServiceTest {
 
     private WishlistService service;
     private WishlistRepository repository;
+    private WishlistMapper mapper;
     private MongoOperations mongoOperations;
 
     @BeforeEach
     protected void setUp() {
         repository = mock(WishlistRepository.class);
         WishListValidator validator = new WishListValidator();
-        var mapper = new WishlistMapperImpl();
+        mapper = new WishlistMapperImpl();
         mongoOperations = mock(MongoOperations.class);
 
         service = new WishlistService(
@@ -72,8 +74,10 @@ class WishlistServiceTest {
         when(repository.buscarProduto(mongoOperations, bo.getProdutoIds(), bo.getClienteId())).thenReturn(false);
         when(repository.findByClienteId(123L)).thenReturn(Optional.of(wishlistExistente));
 
+        var mapperBO = mapper.toModel(bo);
         service.adicionarProdutos(bo);
 
+        assertNotNull(mapperBO.getProdutoIds());
         assertEquals(5, wishlistExistente.getProdutoIds().size());
         verify(mongoOperations).save(wishlistExistente);
     }
