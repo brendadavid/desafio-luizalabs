@@ -6,8 +6,16 @@ services:
     volumes:
       - /data/db
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: DockerfileApp
     ports:
       - 8080:8080
     depends_on:
       - mongodb
+  jacoco-report:
+    build:
+      context: .
+      dockerfile: DockerfileJacocoReport
+    ports:
+      - 8081:80

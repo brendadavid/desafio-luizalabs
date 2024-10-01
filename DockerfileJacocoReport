@@ -1,0 +1,9 @@
+# build
+FROM gradle:8.10.1-jdk21 AS build
+WORKDIR /app
+COPY --chown=gradle:gradle . .
+RUN gradle test --no-daemon
+
+# jacoco report
+FROM nginx:alpine
+COPY --from=build /app/build/reports/jacoco/test/html /usr/share/nginx/html
