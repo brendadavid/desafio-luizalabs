@@ -12,13 +12,13 @@ public class DatabaseChangeLog {
     private static final String COLLECTION_WISHLIST = "wishlist";
 
     @ChangeSet(order = "01", id = "2024-09-29 20:00", author = "Brenda David")
-    public void criarIndiceClientId(MongoDatabase db) {
+    public void criarIndiceClienteId(MongoDatabase db) {
         IndexOptions options = new IndexOptions()
-                .name("clientid_wishlist_index")
+                .name("clienteid_wishlist_index")
                 .background(true);
 
         db.getCollection(COLLECTION_WISHLIST)
-                .createIndex(BsonDocument.parse("{ 'clientId': 1 }"), options);
+                .createIndex(BsonDocument.parse("{ 'clienteId': 1 }"), options);
     }
 
     @ChangeSet(order = "02", id = "2024-09-29 23:00", author = "Brenda David")
