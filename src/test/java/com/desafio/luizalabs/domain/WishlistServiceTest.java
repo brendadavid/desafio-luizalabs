@@ -134,9 +134,9 @@ class WishlistServiceTest {
         when(repository.buscarProdutoPorId(mongoOperations, clienteId, produtoId))
                 .thenReturn(projection);
 
-        service.deletarPorId(clienteId, produtoId);
+        service.deletarProdutoPorId(clienteId, produtoId);
 
-        verify(repository).deletarPorCodigo(mongoOperations, produtoId, clienteId);
+        verify(repository).deletarProdutoPorId(mongoOperations, produtoId, clienteId);
     }
 
     @Test
@@ -151,13 +151,13 @@ class WishlistServiceTest {
         String expectedMessage = "Não existe um produtoId 1567 cadastrado na Wishlist do clienteId 2.";
 
         Exception exception = assertThrows(Exception.class, () ->
-                service.deletarPorId(clienteId, produtoId)
+                service.deletarProdutoPorId(clienteId, produtoId)
         );
 
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
 
-        verify(repository, never()).deletarPorCodigo(any(), anyLong(), anyLong());
+        verify(repository, never()).deletarProdutoPorId(any(), anyLong(), anyLong());
     }
 
     List<Long> gerarIdsAleatorios() {

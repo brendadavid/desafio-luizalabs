@@ -27,15 +27,15 @@ public class WishListValidator {
         }
     }
 
-    public void validaSeExisteProdutoCadastradoPorId(ProdutoProjection projection, Long clienteId, Long produtoId) {
-        if (isEmpty(projection)) {
-           throw ErrosWishlist.NAO_EXISTE_PRODUTO_POR_CODIGO.notFoundException(produtoId, clienteId);
-        }
-    }
-
     public void validaSeExisteAlgumProdutoCadastrado(Long clienteId, Wishlist wishlist) {
         if (isEmpty(wishlist)) {
             throw ErrosWishlist.NAO_EXISTE_PRODUTO_CADASTRADO.notFoundException(clienteId);
+        }
+    }
+
+    public void validaSeExisteProdutoCadastradoPorId(ProdutoProjection projection, Long clienteId, Long produtoId) {
+        if (isEmpty(projection)) {
+           throw ErrosWishlist.NAO_EXISTE_PRODUTO_POR_ID.notFoundException(produtoId, clienteId);
         }
     }
 }

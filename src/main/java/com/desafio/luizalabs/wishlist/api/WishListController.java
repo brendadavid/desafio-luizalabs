@@ -54,11 +54,11 @@ public class WishListController {
     @DeleteMapping("/{clienteId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Operação para deletar um produto da Wishlist do cliente por id do produto.")
-    public void deletarProdutoPorCodigo(
+    public void deletarProdutoPorId(
             @PathVariable("clienteId") Long clienteId,
             @Parameter(name = "produtoId", description = "Id do produto cadastrado.")
             @RequestParam(value = "produtoId") Long produtoId
     ) {
-        service.deletarPorId(clienteId, produtoId);
+        service.deletarProdutoPorId(clienteId, produtoId);
     }
 }

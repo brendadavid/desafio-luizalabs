@@ -39,10 +39,10 @@ public class WishlistService {
                 );
     }
 
-    public void deletarPorId(Long clienteId, Long produtoId) {
+    public void deletarProdutoPorId(Long clienteId, Long produtoId) {
         var produtoProjection = repository.buscarProdutoPorId(mongoOperations, clienteId, produtoId);
         validator.validaSeExisteProdutoCadastradoPorId(produtoProjection, clienteId, produtoId);
 
-        repository.deletarPorCodigo(mongoOperations, produtoId, clienteId);
+        repository.deletarProdutoPorId(mongoOperations, produtoId, clienteId);
     }
 }

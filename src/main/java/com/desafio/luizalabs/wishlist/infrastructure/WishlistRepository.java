@@ -54,7 +54,7 @@ public interface WishlistRepository extends MongoRepository<Wishlist, String>{
         return mongoOperations.findOne(query, ProdutoProjection.class, "wishlist");
     }
 
-    default void deletarPorCodigo(
+    default void deletarProdutoPorId(
             MongoOperations mongoOperations,
             Long produtoId,
             Long clienteId
