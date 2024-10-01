@@ -40,13 +40,17 @@ O relatório de coverage do Jacoco ficará disponível na porta `8081`:
 
 - http://localhost:8081
 
+Caso seja necessário acessar o MongoDB para verificar as alterações, isso pode ser feito com a URI de conexão abaixo:
+
+- `mongodb://localhost:27017/`
+
+Durante o desenvolvimento da aplicação, foi utilizada a ferramenta MongoDB Compass.
+
 ## Considerações sobre a implementação
 
 Seguindo as especificações, foram criados 4 endpoints:
 
 ### Endpoint POST para adicionar produtos da Wishlist do cliente
-
----
 
 Nesse endpoint, deve ser enviado o `clientId` e o `produtoIds` no seguinte formato:
 
@@ -62,7 +66,7 @@ Regras:
 - O campo `produtoIds` não pode ser vazio e deve ser uma lista do tipo Long;
 - O campo `produtoIds` não pode conter mais de 20 produtos;
 - Caso não exista uma Wishlist criada com o mesmo `clientId`, será criado um novo documento e a lista `produtoIds` será adicionada;
-- Caso exista Wishlist criada com o mesmo `clientId`, será verificado se não está sendo adicionado o mesmo produto:
+- Caso exista uma Wishlist criada com o mesmo `clientId`, será verificado se não está sendo adicionado o mesmo produto:
   - Se sim, retorna uma exception informando que já existe o produto na Wishlist do cliente;
   - Se não, os produtos são adicionados na Wishlist existente;
   - Antes de salvar no banco, é feita novamente a validação para ver se o limite máximo de 20 produtos não será excedido.
@@ -88,16 +92,16 @@ Regras:
 
 - O campo `clientId` não pode ser vazio e deve ser do tipo Long;
 - O campo `produtoId` não pode ser vazio e deve ser do tipo Long;
-- Será feita uma busca para saber se existe na Wishlist com o `clientId` informado, um produto com o mesmo `produtoId` informado:
+- Será feita uma busca para saber se o `produtoId` existe na Wishlist do `clientId` informado:
   - Se sim, retorna o `produtoId` encontrado;
-  - Se não, retorna uma exception informando que não foi encontrado um produto com o `clientId` e `produtoId` informados.
+  - Se não, retorna uma exception informando que não foi encontrado um produto para os parametros informados.
 
 ### Endpoint DELETE para remover um produto da Wishlist do cliente
 
-Nesse endpoint deve ser enviado o `clientId` como `PathVariable`.
+Nesse endpoint deve ser enviado o `clientId` como `PathVariable` e um `produtoId` como `QueryParam`.
 
 - O campo `clientId` não pode ser vazio e deve ser do tipo Long;
 - O campo `produtoId` não pode ser vazio e deve ser do tipo Long;
-- Será feita uma busca para saber se existe na Wishlist com o `clientId` informado, um produto com o mesmo `produtoId` informado:
+- Será feita uma busca para saber se o `produtoId` existe na Wishlist do `clientId` informado:
   - Se sim, o produto será deletado da lista de `produtoIds` da Wishlist do cliente;
   - Se não, retorna uma exception informando que não foi encontrado um produto com o `clientId` e `produtoId` informados.
